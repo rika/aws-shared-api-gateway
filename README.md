@@ -12,10 +12,10 @@ You will need AWS CLI, NodeJS, the [`Serverles framework`](https://serverless.co
 
 In this service `serverless.yml`, configure the following:
 
-- REGION
-- CERTIFICATE_ARN
-- STAGING_DOMAIN
-- PRODUCTION_DOMAIN
+- REGION (ex: us-east-1)
+- CERTIFICATE_ARN (ex: arn:aws:acm:us-east-1:xxxx:certificate/aaaa-bbbb-cccc)
+- STAGING_DOMAIN (ex: dev.my.domain.com)
+- PRODUCTION_DOMAIN (ex: my.domain.com)
 
 Create your custom domain by executing:
 ``` 
