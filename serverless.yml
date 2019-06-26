@@ -1,0 +1,54 @@
+service: aws-shared-api-gateway
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: dev
+  region: # REGION (ex: us-east-1)
+  versionFunctions: false
+
+plugins:
+  - serverless-domain-manager
+
+custom:
+  certificateArn: # CERTIFICATE_ARN (ex: arn:aws:acm:us-east-1:xxxx:certificate/aaaa-bbbb-cccc)
+  domainName:
+    dev: # STAGING_DOMAIN (ex: dev.my.domain.com)
+    prod: # PRODUCTION_DOMAIN (ex: my.domain.com)
+  customDomain:
+    domainName: ${self:custom.domainName.${opt:stage, self:provider.stage}}
+    basePath: ''
+    stage: ${opt:stage, self:provider.stage}
+    certificateArn: ${self:custom.certificateArn}
+    createRoute53Record: true
+    endpointType: regional
+
+resources:
+  Outputs:
+    apiGatewayRestApiId:
+      Value:
+        Ref: ApiGatewayRestApi
+      Export:
+        Name: ${self:service}-${opt:stage, self:provider.stage}-restApiId
+
+    apiGatewayRestApiRootResourceId:
+      Value:
+        Fn::GetAtt:
+          - ApiGatewayRestApi
+          - RootResourceId
+      Export:
+        Name: ${self:service}-${opt:stage, self:provider.stage}-rootResourceId
+
+functions:
+  index:
+    handler: index.handler
+    events:
+      - http:
+          path: /
+          method: get
+          private: true
+
+package:
+  exclude:
+    - node_modules/**
+

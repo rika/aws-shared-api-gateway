@@ -1,0 +1,24 @@
+{
+  "name": "aws-shared-api-gateway",
+  "version": "1.0.0",
+  "description": "AWS Shared API Gateway with custom domain",
+  "main": "index.js",
+  "dependencies": {
+    "serverless-domain-manager": "^3.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rika/aws-shared-api-gateway.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rika/aws-shared-api-gateway/issues"
+  },
+  "homepage": "https://github.com/rika/aws-shared-api-gateway#readme"
+}
